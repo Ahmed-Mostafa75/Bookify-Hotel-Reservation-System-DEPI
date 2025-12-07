@@ -1,0 +1,66 @@
+@page
+@model RegisterModel
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Register";
+}
+<div class="auth-page">
+    <div class="auth-container">
+        <div class="card auth-card">
+            <div class="card-body">
+                <h1><i class="bi bi-person-plus me-2"></i>Create Account</h1>
+                <p class="text-center text-muted mb-4">Join Bookify and start booking your perfect stay</p>
+                
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger validation-summary-errors"></div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Input.FullName" class="form-label">
+                            <i class="bi bi-person me-1"></i>Full Name
+                        </label>
+                        <input asp-for="Input.FullName" class="form-control" placeholder="Enter your full name" />
+                        <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Input.Email" class="form-label">
+                            <i class="bi bi-envelope me-1"></i>Email Address
+                        </label>
+                        <input asp-for="Input.Email" class="form-control" placeholder="Enter your email" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Input.Password" class="form-label">
+                            <i class="bi bi-lock me-1"></i>Password
+                        </label>
+                        <input asp-for="Input.Password" class="form-control" placeholder="Enter your password" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Input.ConfirmPassword" class="form-label">
+                            <i class="bi bi-lock-fill me-1"></i>Confirm Password
+                        </label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm your password" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-person-plus me-2"></i>Register
+                    </button>
+                </form>
+                
+                <div class="auth-links">
+                    <p class="mb-0">
+                        Already have an account? 
+                        <a asp-page="/Account/Login">Sign in here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,19 @@
+@model IEnumerable<Bookify.Data.Entities.Booking>
+@{
+    ViewData["Title"] = "Bookings";
+}
+<table class="table table-striped datatable">
+    <thead><tr><th>User</th><th>Room</th><th>UserName</th><th>Dates</th><th>Status</th><th>Total</th></tr></thead>
+    <tbody>
+    @foreach(var b in Model){
+        <tr>
+            <td>@b.UserId</td>
+            <td>@b.RoomId</td>
+            <td>@b.User.FullName</td>
+            <td>@b.CheckIn.ToShortDateString() - @b.CheckOut.ToShortDateString()</td>
+            <td>@b.Status</td>
+            <td>@b.TotalCost</td>
+        </tr>
+    }
+    </tbody>
+</table>

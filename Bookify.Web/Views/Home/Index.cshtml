@@ -1,0 +1,290 @@
+@{
+    ViewData["Title"] = "Bookify";
+}
+<section class="hero mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <h1 class="display-5 fw-bold">Welcome to Bookify</h1>
+                <p class="lead">Discover luxury accommodations, reserve your perfect stay, and experience seamless booking with secure payments.</p>
+                <div class="mt-4">
+                    <a class="btn btn-primary btn-lg me-2 mb-2" asp-controller="Rooms" asp-action="Index">
+                        <i class="bi bi-search me-2"></i>Browse Rooms
+                    </a>
+                    <a class="btn btn-success btn-lg me-2 mb-2" asp-controller="Booking" asp-action="Cart">
+                        <i class="bi bi-cart me-2"></i>View Cart
+                    </a>
+                    @if (User.IsInRole("Admin")){
+                        <a class="btn btn-outline-light btn-lg mb-2" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                            <i class="bi bi-shield-check me-2"></i>Admin Panel
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card shadow-lg">
+                    <div class="card-header">
+                        <i class="bi bi-calendar-event me-2"></i>Quick Search
+                    </div>
+                    <div class="card-body">
+                        <form method="get" asp-controller="Rooms" asp-action="Index" class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="bi bi-calendar-check me-1"></i>Check In</label>
+                                <input type="date" name="checkIn" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="bi bi-calendar-x me-1"></i>Check Out</label>
+                                <input type="date" name="checkOut" class="form-control" />
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-success w-100">
+                                    <i class="bi bi-search me-2"></i>Search Availability
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
+
+<div class="container mb-5">
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="p-4 border rounded">
+                <div class="mb-3">
+                    <i class="bi bi-shield-check" style="font-size: 3rem; color: var(--success-color);"></i>
+                </div>
+                <h5>Secure Payments</h5>
+                <p>Stripe-powered checkout and instant confirmations for your peace of mind.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="p-4 border rounded">
+                <div class="mb-3">
+                    <i class="bi bi-funnel" style="font-size: 3rem; color: var(--info-color);"></i>
+                </div>
+                <h5>Flexible Search</h5>
+                <p>Filter by dates and room types to find the perfect accommodation for your needs.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="p-4 border rounded">
+                <div class="mb-3">
+                    <i class="bi bi-gear" style="font-size: 3rem; color: var(--primary-color);"></i>
+                </div>
+                <h5>Admin Controls</h5>
+                <p>Comprehensive management tools for rooms, types, bookings, and user accounts.</p>
+            </div>
+        </div>
+        <section class="image-carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide active">
+                    <img src="images/carousel-1.jpg" alt="Luxury Rooms" loading="lazy">
+                    <div class="carousel-caption">
+                        <h3>Luxury Accommodations</h3>
+                        <p>Experience elegance and comfort in our premium rooms</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="images/carousel-2.jpg" alt="Spa & Wellness" loading="lazy">
+                    <div class="carousel-caption">
+                        <h3>Spa & Wellness</h3>
+                        <p>Rejuvenate yourself with our world-class spa services</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="images/carousel-3.jpg" alt="Fine Dining" loading="lazy">
+                    <div class="carousel-caption">
+                        <h3>Fine Dining Experience</h3>
+                        <p>Enjoy exquisite cuisine prepared by our expert chefs</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="images/carousel-4.jpg" alt="Swimming Pool" loading="lazy">
+                    <div class="carousel-caption">
+                        <h3>Recreation Facilities</h3>
+                        <p>Swim, relax, and enjoy our premium amenities</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <button class="carousel-btn prev" onclick="changeSlide(-1)" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next" onclick="changeSlide(1)" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Carousel Dots -->
+            <div class="carousel-nav">
+                <span class="carousel-dot active" onclick="currentSlide(1)" aria-label="Slide 1"></span>
+                <span class="carousel-dot" onclick="currentSlide(2)" aria-label="Slide 2"></span>
+                <span class="carousel-dot" onclick="currentSlide(3)" aria-label="Slide 3"></span>
+                <span class="carousel-dot" onclick="currentSlide(4)" aria-label="Slide 4"></span>
+            </div>
+        </section>
+        <section class="why-bookify">
+            <h2>Why Choose Bookify?</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Best Price Guarantee</h4>
+                    <p>Find the lowest rates on accommodation</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h4>Secure Booking</h4>
+                    <p>Your data is protected and encrypted</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-headset"></i>
+                    <h4>24/7 Support</h4>
+                    <p>Customer service always available</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-undo"></i>
+                    <h4>Easy Cancellation</h4>
+                    <p>Flexible booking options for peace of mind</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-dumbbell"></i>
+                    <h4>Fitness Center</h4>
+                    <p>State-of-the-art gym facilities available</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-spa"></i>
+                    <h4>Spa & Massage</h4>
+                    <p>Professional massage therapy & wellness services</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-thermometer-half"></i>
+                    <h4>Sauna & Steam</h4>
+                    <p>Relax in our heated sauna & steam rooms</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-swimming-pool"></i>
+                    <h4>Swimming Pool</h4>
+                    <p>Indoor & outdoor pools with heated water</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-utensils"></i>
+                    <h4>Restaurant & Bar</h4>
+                    <p>Fine dining & premium beverage selection</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-bell"></i>
+                    <h4>Room Service</h4>
+                    <p>24-hour in-room dining & concierge services</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-car"></i>
+                    <h4>Free Parking</h4>
+                    <p>Complimentary valet & self-parking available</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-wifi"></i>
+                    <h4>High-Speed WiFi</h4>
+                    <p>Unlimited internet throughout the property</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-user-tie"></i>
+                    <h4>Concierge Service</h4>
+                    <p>Expert assistance for reservations & tours</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-plane"></i>
+                    <h4>Airport Transfer</h4>
+                    <p>Convenient transportation to & from airport</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-video"></i>
+                    <h4>Meeting Rooms</h4>
+                    <p>Professional conference & event facilities</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-star"></i>
+                    <h4>Premium Experience</h4>
+                    <p>5-star rated hospitality & exceptional service</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+@section Scripts{
+
+
+
+    <script>
+        let currentSlideIndex = 1;
+        let autoSlideTimer;
+
+        // Change slide with arrows
+        function changeSlide(n) {
+          clearTimeout(autoSlideTimer);
+          showSlide(currentSlideIndex += n);
+          startAutoSlide();
+        }
+
+        // Jump to specific slide
+        function currentSlide(n) {
+          clearTimeout(autoSlideTimer);
+          showSlide(currentSlideIndex = n);
+          startAutoSlide();
+        }
+
+        // Display slide
+        function showSlide(n) {
+          const slides = document.querySelectorAll('.carousel-slide');
+          const dots = document.querySelectorAll('.carousel-dot');
+
+          if (n > slides.length) {
+            currentSlideIndex = 1;
+          }
+          if (n < 1) {
+            currentSlideIndex = slides.length;
+          }
+
+          slides.forEach(slide => slide.classList.remove('active'));
+          dots.forEach(dot => dot.classList.remove('active'));
+
+          slides[currentSlideIndex - 1].classList.add('active');
+          dots[currentSlideIndex - 1].classList.add('active');
+        }
+
+        // Auto-slide every 5 seconds
+        function startAutoSlide() {
+          autoSlideTimer = setTimeout(() => {
+            currentSlideIndex++;
+            showSlide(currentSlideIndex);
+            startAutoSlide();
+          }, 5000);
+        }
+
+        // Initialize carousel
+        document.addEventListener('DOMContentLoaded', () => {
+          showSlide(currentSlideIndex);
+          startAutoSlide();
+        });
+    </script>
+}

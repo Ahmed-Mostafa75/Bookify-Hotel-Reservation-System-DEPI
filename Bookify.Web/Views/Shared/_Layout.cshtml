@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Bookify.Web</title>
+    <script type="importmap"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKM+FfQ6Y2p1ZVJAXPj0Y5cPjEJp4mQw5cQ9l7iB2KzVgXG4pRkCj1o8rjz3gkF3G0kE0n3lEJm8NfGf/2xF6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Bookify.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header>
+<nav class="navbar navbar-expand-md navbar-dark sticky-top">
+            <div class="container-fluid">
+                <div class="nav-logo">
+                    <a class="" asp-area="" asp-controller="Home" asp-action="Index">
+                    
+                        <img src="../images/bookify-high-resolution-logo-grayscale-transparent.png"
+                             alt="Bookify Logo"
+                             id="mini-logo" />
+
+                    </a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-house-door me-1"></i>Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Rooms" asp-action="Index"><i class="bi bi-door-open me-1"></i>Rooms</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Booking" asp-action="Cart"><i class="bi bi-cart me-1"></i>Cart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Booking" asp-action="History"><i class="bi bi-calendar-check me-1"></i>My Bookings</a>
+                        </li>
+                        @if (User.IsInRole("Admin")){
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="bi bi-shield-check me-1"></i>Admin</a>
+                            </li>
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-lg-2">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-2 mb-md-0">
+                   
+                    <h5><i class="bi bi-building me-2"></i> About Bookify</h5>
+                    <p class="footer-tagline">
+                        Bookify helps you find 
+                    </p>
+                    <p class="footer-tagline">and book the perfect hotel room at</p>
+                    <p class="footer-tagline">
+                        the best price.
+                        Fast,secure,
+                    </p>
+                    <p class ="footer-tagline">and easy reservations anytime, anywhere.</p>
+                 
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" title="Twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a asp-controller="Home" asp-action="Index"><i class="bi bi-chevron-right"></i>Home</a></li>
+                        <li><a asp-controller="Rooms" asp-action="Index"><i class="bi bi-chevron-right"></i>Rooms</a></li>
+                        <li><a asp-controller="Booking" asp-action="Cart"><i class="bi bi-chevron-right"></i>Cart</a></li>
+                        <li><a asp-controller="Booking" asp-action="History"><i class="bi bi-chevron-right"></i>Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <h5>Contact</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="bi bi-envelope me-2"></i>support@bookify.com</a></li>
+                        <li><a href="#"><i class="bi bi-telephone me-2"></i>(+20) 01152871396</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0">
+                    <i class="bi bi-copyright me-1"></i>2025 <span class="footer-brand">Bookify</span>. All rights reserved. | 
+                    <a href="#" class="ms-1">Privacy Policy</a> | 
+                    <a href="#" class="ms-1">Terms of Service</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-5uVQ+HuxBkgqWqzV3lqQk6Bf9YHqZrP6WZfGJ3F3b1nJg0ZkQmW7QWnGJm2kJz5YfQ+GkUu9nC3q9w1F2bP7h7g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(function(){
+            var msg = $("#toast-message").text();
+            if(msg){ toastr.success(msg); }
+            $(".datatable").each(function(){
+                new DataTable(this);
+            });
+        });
+    </script>
+    <div id="toast-message" style="display:none">@TempData["toast"]</div>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

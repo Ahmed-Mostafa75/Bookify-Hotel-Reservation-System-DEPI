@@ -1,0 +1,87 @@
+@model IEnumerable<Bookify.Web.Models.ReservationCartItem>
+@{
+    ViewData["Title"] = "Reservation Cart";
+}
+
+<div class="mb-4">
+    <h2><i class="bi bi-cart me-2"></i>Reservation Cart</h2>
+    <p class="text-muted">Review your selected reservations</p>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><i class="bi bi-door-open me-2"></i>Room</th>
+                    <th><i class="bi bi-calendar-check me-2"></i>Check In</th>
+                    <th><i class="bi bi-calendar-x me-2"></i>Check Out</th>
+                    <th class="text-end">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var rooms = ViewBag.RoomsById as IDictionary<int, Bookify.Data.Entities.Room>;
+                }
+                @foreach (var i in Model)
+                {
+                    <tr>
+                        <td>
+                            @{
+                                var room = rooms != null && rooms.ContainsKey(i.RoomId) ? rooms[i.RoomId] : null;
+                            }
+                            @if (room != null)
+                            {
+                                <strong>@room.RoomType?.Name — Room @room.Number</strong>
+                            }
+                            else
+                            {
+                                <strong>Room #@i.RoomId</strong>
+                            }
+                        </td>
+                        <td>
+                            <span class="badge bg-info">@i.CheckIn.ToShortDateString()</span>
+                        </td>
+                        <td>
+                            <span class="badge bg-warning">@i.CheckOut.ToShortDateString()</span>
+                        </td>
+                        <td class="text-end">
+                            <!-- تم التحديث: زر دفع واحد لكل Cart -->
+                            <!-- يقوم Redirect مباشرة إلى CheckoutCart في Controller -->
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-end mt-3">
+        <form asp-action="Checkout" method="post">
+            @for (int index = 0; index < Model.Count(); index++)
+            {
+                <input type="hidden" name="cartItems[@index].RoomId" value="@Model.ElementAt(index).RoomId" />
+                <input type="hidden" name="cartItems[@index].CheckIn" value="@Model.ElementAt(index).CheckIn.ToString("yyyy-MM-dd")" />
+                <input type="hidden" name="cartItems[@index].CheckOut" value="@Model.ElementAt(index).CheckOut.ToString("yyyy-MM-dd")" />
+            }
+            <button type="submit" class="btn btn-success btn-lg">
+                <i class="bi bi-credit-card me-2"></i>Pay All Reservations
+            </button>
+        </form>
+
+
+    </div>
+}
+else
+{
+    <div class="card shadow-lg text-center py-5">
+        <div class="card-body">
+            <i class="bi bi-cart-x" style="font-size: 4rem; color: var(--text-muted);"></i>
+            <h4 class="mt-3">Your cart is empty</h4>
+            <p class="text-muted">Start browsing rooms to add reservations to your cart.</p>
+            <a class="btn btn-primary mt-3" asp-controller="Rooms" asp-action="Index">
+                <i class="bi bi-search me-2"></i>Browse Rooms
+            </a>
+        </div>
+    </div>
+}

@@ -1,0 +1,16 @@
+@model IEnumerable<Bookify.Data.Entities.ApplicationUser>
+@{
+    ViewData["Title"] = "Users";
+}
+<table class="table table-striped datatable">
+    <thead><tr><th>UserName</th><th>Email</th><th></th></tr></thead>
+    <tbody>
+    @foreach(var u in Model){
+        <tr>
+            <td>@u.UserName</td>
+            <td>@u.Email</td>
+            <td></td>
+        </tr>
+    }
+    </tbody>
+</table>

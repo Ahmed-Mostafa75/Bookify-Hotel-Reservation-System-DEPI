@@ -1,0 +1,8 @@
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.ds_store
+.vs/
+appsettings*.json

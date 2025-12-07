@@ -1,0 +1,17 @@
+@model IEnumerable<Bookify.Data.Entities.RoomType>
+@{
+    ViewData["Title"] = "Room Types";
+}
+<a class="btn btn-primary mb-3" asp-action="Create">Add Room Type</a>
+<table class="table table-striped datatable">
+    <thead><tr><th>Name</th><th>Price</th><th>Capacity</th></tr></thead>
+    <tbody>
+    @foreach(var t in Model){
+        <tr>
+            <td>@t.Name</td>
+            <td>@t.BasePricePerNight</td>
+            <td>@t.Capacity</td>
+        </tr>
+    }
+    </tbody>
+</table>

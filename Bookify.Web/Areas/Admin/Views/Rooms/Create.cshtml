@@ -1,0 +1,20 @@
+@model Bookify.Data.Entities.Room
+@{
+    ViewData["Title"] = "Create Room";
+}
+<form asp-action="Create">
+    <div class="mb-3">
+        <label class="form-label">Number</label>
+        <input class="form-control" asp-for="Number" />
+    </div>
+   
+    <div class="mb-3">
+        <label class="form-label">Room Type</label>
+        <select class="form-select" asp-for="RoomTypeId">
+            @foreach (var rt in (IEnumerable<Bookify.Data.Entities.RoomType>)ViewBag.RoomTypes){
+                <option value="@rt.Id">@rt.Name</option>
+            }
+        </select>
+    </div>
+    <button class="btn btn-success">Save</button>
+</form>

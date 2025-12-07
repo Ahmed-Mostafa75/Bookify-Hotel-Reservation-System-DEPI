@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+<div class="row g-3">
+    <div class="col-md-3">
+        <a class="btn btn-outline-primary w-100" asp-area="Admin" asp-controller="Rooms" asp-action="Index">Rooms</a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-outline-primary w-100" asp-area="Admin" asp-controller="RoomTypes" asp-action="Index">Room Types</a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-outline-primary w-100" asp-area="Admin" asp-controller="Bookings" asp-action="Index">Bookings</a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-outline-primary w-100" asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a>
+    </div>
+</div>
